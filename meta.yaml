@@ -1,0 +1,41 @@
+{% set name = "django-extra-views" %}
+{% set version = "0.14.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 2b9daf99c79e91035aa3f269232afcb3ccf837f0f49f2dc6da6916fe34bc1e0a
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - django >=2.1
+    - pip
+    - python
+  run:
+    - django >=2.1
+    - python
+
+test:
+  imports:
+    - extra_views
+    - extra_views.contrib
+
+about:
+  home: "https://github.com/AndrewIngram/django-extra-views"
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: "Extra class-based views for Django"
+  doc_url: https://django-extra-views.readthedocs.io/
+  dev_url: https://github.com/AndrewIngram/django-extra-views
+
+extra:
+  recipe-maintainers:
+    - https://github.com/gb119
