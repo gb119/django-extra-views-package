@@ -16,7 +16,7 @@ build:
 
 requirements:
   host:
-    - django >=4,2
+    - django >=4.2
     - pip
     - python
   run:
