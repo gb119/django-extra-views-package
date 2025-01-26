@@ -6,8 +6,7 @@ package:
   version: "{{ version }}"
 
 source:
-  git-url: https://github.com/AndrewIngram/django-extra-views.git
-  git-rev: 571f5e2239467f16ce00ad544df8101edc969ed4
+  url: https://github.com/AndrewIngram/django-extra-views/archive/571f5e2239467f16ce00ad544df8101edc969ed4.zip
   
 build:
   noarch: python
