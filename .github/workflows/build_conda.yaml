@@ -6,6 +6,9 @@ on:
 
 # workflow_dispatch:        # Un comment line if you also want to trigger action manually
 
+permissions:
+  contents: read
+
 jobs:
   conda_deployment_with_new_tag:
     name: Conda deployment of package for platform ${{ matrix.os }} with Python ${{ matrix.python-version }}
@@ -31,7 +34,7 @@ jobs:
       - name: Build conda package
         shell: bash -l {0}
         run: |
-          out_dir=$(mktemp -d -t compilation-XXXXXXXXXX)
+          out_dir=$(mktemp -d -t conda-build-XXXXXXXXXX)
           echo "OUT_DIR=$out_dir" >> "$GITHUB_ENV"
           conda activate build
           conda build . \
