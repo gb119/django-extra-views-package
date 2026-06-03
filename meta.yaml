@@ -1,12 +1,13 @@
 {% set name = "django-extra-views" %}
-{% set version = "0.15.0" %}
+{% set version = "0.16.0" %}
 
 package:
   name: "{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  url: https://github.com/AndrewIngram/django-extra-views/archive/571f5e2239467f16ce00ad544df8101edc969ed4.zip
+  url: https://files.pythonhosted.org/packages/ac/61/c6d2ced11fc4235d2aeb422ad5af3b516effd942e2be5a263a5d93dcb1e2/django_extra_views-0.16.0.tar.gz
+  sha256: 7f8e07bd6c9388816a7c08d752661172d4078758c2079fc0cadddfcf5cd38ae3
   
 build:
   noarch: python
