@@ -23,12 +23,29 @@ jobs:
           auto-update-conda: true
           auto-activate-base: false
           show-channel-urls: true
-      - name: Build and upload the conda packages
-        uses: uibcdf/action-build-and-upload-conda-packages@v1.4.0
-        with:
-          meta_yaml_dir: .
-          overwrite: true
-          python-version: "3.12"
-          user: phygbu
-          label: main
-          token: ${{ secrets.ANACONDA }} # Replace with the right name of your secret
+      - name: Build conda package
+        shell: bash -l {0}
+        run: |
+          out_dir=$(mktemp -d -t compilation-XXXXXXXXXX)
+          conda run -n build conda build . \
+            --no-anaconda-upload \
+            --output-folder "$out_dir" \
+            --python 3.12
+      - name: Upload conda package
+        shell: bash -l {0}
+        env:
+          ANACONDA_API_TOKEN: ${{ secrets.ANACONDA }}
+        run: |
+          for dirname in "$out_dir"/*; do
+            if [ -d "$dirname" ]; then
+              for filename in "$dirname"/*; do
+                if [[ "$filename" == *.tar.bz2 ]]; then
+                  conda run -n build anaconda upload \
+                    --user phygbu \
+                    --force \
+                    --label main \
+                    "$filename"
+                fi
+              done
+            fi
+          done
