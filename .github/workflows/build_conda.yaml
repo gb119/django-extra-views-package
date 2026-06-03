@@ -27,7 +27,8 @@ jobs:
         shell: bash -l {0}
         run: |
           out_dir=$(mktemp -d -t compilation-XXXXXXXXXX)
-          conda run -n build conda build . \
+          conda activate build
+          conda build . \
             --no-anaconda-upload \
             --output-folder "$out_dir" \
             --python 3.12
@@ -36,6 +37,7 @@ jobs:
         env:
           ANACONDA_API_TOKEN: ${{ secrets.ANACONDA }}
         run: |
+          conda activate build
           for dirname in "$out_dir"/*; do
             if [ -d "$dirname" ]; then
               for filename in "$dirname"/*; do
